@@ -1,9 +1,6 @@
 # SQL Assessment
 
-For this assessment, pretend we now we have a totally different website then from object relations section.
-Please don't base your answers on your ruby work.
-
-Here, we have a different Yelp-style application. We need customers, restaurants, owners, and reviews.  How do they link up?
+Welcome to Netflix! For this domain, we'll be modeling out movies, genres, and reviews.
 
 ## Topics / Objectives
 
@@ -53,17 +50,14 @@ class Book
 end
 
 ```
-  - Customer#reviews
-    - returns all of the reviews written by that customer
-  - Owner#restaurants
-    - returns all restaurants belonging to that owner
-  - Restaurant#owner
-    - returns the owner of that restaurant
-  - Review#customer
-    - returns the customer of that review
-  - Review#restaurant
-    - returns the restaurant of that particular review
-
+  - Genre#movies
+    - returns all of the movies with that given genre
+  - Movie#genres
+    - returns all of the genres for that given movie
+  - Movie#reviews
+    - returns all the reviews for a given movie
+  - Review#movie
+    - returns the movie for a given review
 
 #### Hints:
   - The data always lives on the belongs_to relationship

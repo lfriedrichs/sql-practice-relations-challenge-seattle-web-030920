@@ -1,55 +1,41 @@
 require_relative '../config/environment.rb'
 
-[Customer, Review, Restaurant, Owner].each do |model|
+[MovieGenre, Movie, Genre, Review].each do |model|
   model.create_table
   model.drop_table
   model.create_table
 end
-customers = (1..10).to_a.map do |num|
 
-  customer = Customer.new(name: Faker::Book.author, 
-        birth_year: rand(1920..1990),
-        hometown: Faker::Address.city)
+movies = (1..10).to_a.map do |num|
+  movies = Movie.new(title: Faker::Book.title,
+        release_year: rand(1920..1990)
+        )
 end
 
-customers.each do |customer|
-  customer.save
+movies.each do |movie|
+  movie.save
 end
 
-owners = (1..10).to_a.map do |num|
-
-  owner = Owner.new(name: Faker::Book.author, 
-        birth_year: rand(1920..1990),
-        hometown: Faker::Address.city)
+genres = ["Drama", "Science Fiction", "Horror", "Fantasy", "Romance", "Comedy"].map do |name|
+  genre = Genre.new(name: name)
 end
 
-owners.each do |owner|
-  owner.save
+genres.each do |genre|
+  genre.save
 end
 
-restaurants = Owner.all.map do |owner|
-  restaurant = Restaurant.new(owner_id: owner.id, name: Faker::Book.author, location: Faker::Address.city)
-
-  other_restaurant = Restaurant.new(owner_id: owner.id, name: Faker::Book.author, location: Faker::Address.city)
-  [restaurant, other_restaurant]
-end.flatten
-
-restaurants.each do |restaurant|
-  restaurant.save
+Movie.all.map do |movie|
+  genres = Genre.all
+  (1..3).to_a.sample.times do
+    genre = genres.delete( genres.sample )
+    mg = MovieGenre.new(movie_id: movie.id, genre_id: genre.id)
+    mg.save
+  end
 end
 
-restaurant_ids = Restaurant.all.map { |g| g.id }.cycle.each
 
-reviews = Customer.all.map.with_index(1) do |customer, index|
-  
-  restaurant_id = restaurant_ids.next
-  review = Review.new(restaurant_id: restaurant_id, customer_id: customer.id)
-  restaurant_id = restaurant_ids.next
-  other_review = Review.new(restaurant_id: restaurant_id, customer_id: customer.id)
-  [review, other_review]
-end.flatten
-
-reviews.each do |gb|
-  gb.save
+reviews = Movie.all.map do |movie|
+  Review.new(content: Faker::Lorem.paragraph, movie_id: movie.id)
 end
 
+reviews.each {|r| r.save }
