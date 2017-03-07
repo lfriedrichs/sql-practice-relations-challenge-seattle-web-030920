@@ -11,6 +11,10 @@ class Movie
   attr_accessor(*self.public_attributes)
   attr_reader :id
 
+  def self.by_year(year)
+
+  end
+
   def genres
   end
 
