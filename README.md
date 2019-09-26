@@ -67,5 +67,3 @@ end
   - If there is a many to many, we need a third table
   - We've provided you with a `console.rb` file and a `seeds.rb` file. You can run `ruby tools/seeds.rb` to add some data to your database, and then `ruby tools/console.rb` to interact with your Ruby classes.
 
-
-#### Write your domain model here:
