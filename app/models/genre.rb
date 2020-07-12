@@ -10,5 +10,6 @@ class Genre
   attr_reader :id
 
   def movies
+    @movies
   end
 end
